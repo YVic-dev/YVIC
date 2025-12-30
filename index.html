@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="YVIC Research Lab — Independent research on how control signals shape representation geometry in large language models at the human–model interface." />
+  <title>YVIC Research Lab</title>
+
+  <!-- Minimal, self-contained styling -->
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --card:#111218;
+      --text:#e8eaf0;
+      --muted:#aeb4c0;
+      --link:#79b8ff;
+      --border:rgba(255,255,255,.08);
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    html,body{height:100%}
+    body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--text);
+    line-height:1.55;
+    background: var(--bg); /* body 只放純色，避免被分段 */
+    }
+
+    /* 固定背景層：永遠鋪滿 viewport，不會被切段 */
+    body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(121,184,255,.12), transparent 55%),
+        radial-gradient(900px 500px at 80% 25%, rgba(144,255,191,.08), transparent 55%),
+        var(--bg);
+    transform: translateZ(0); /* 逼 Safari 用同一層合成 */
+    }
+    .wrap{
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 48px 18px 72px;
+    }
+    .top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom: 22px;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    h1{
+      font-size: 34px;
+      letter-spacing: .2px;
+      margin:0;
+    }
+    .tagline{
+      margin:0;
+      color:var(--muted);
+      max-width: 64ch;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border:1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 1px 0 rgba(255,255,255,.04) inset;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      margin-top: 6px;
+    }
+    .pill b{color:var(--text); font-weight:600;}
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns: 1fr;}
+      .top{flex-direction:column;}
+    }
+    .card{
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 18px 18px 16px;
+    }
+    .card h2{
+      margin:0 0 24px 0;
+      font-size: 16px;
+      letter-spacing:.2px;
+    }
+    .card p{margin: 10px 0; color: var(--text);}
+    .muted{color: var(--muted);}
+    ul{margin: 10px 0 0 18px; padding:0}
+    li{margin: 6px 0; color: var(--text);}
+    .kvs{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 8px;
+    }
+    .kv{
+      border:1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,.18);
+    }
+    .kv .k{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .kv .v{font-size: 14px;}
+    .pub{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .pubitem{
+      border:1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(0,0,0,.18);
+    }
+    .pubtitle{
+      font-weight: 650;
+      margin:0 0 4px 0;
+    }
+    .pubmeta{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer{
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .smallmono{font-family:var(--mono);}
+
+    /* Luna gallery */
+    .gallery{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 520px){
+      .gallery{grid-template-columns: 1fr;}
+    }
+    .shot{
+      width:100%;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      display:block;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <div class="top">
+      <div class="brand">
+        <h1>YVIC Research Lab</h1>
+        <p class="tagline">
+          Independent research on representation geometry, compact language models, and interface-level control in human–LLM interaction.
+        </p>
+        <div class="pill">
+          <span>Contact:</span>
+          <b><a href="mailto:victor@yvic.dev">victor@yvic.dev</a></b>
+          <span class="muted">·</span>
+          <span class="muted">Taipei (UTC+8)</span>
+        </div>
+      </div>
+
+      <div class="pill" title="Quick links">
+        <span class="muted">Links:</span>
+        <a href="https://github.com/YVic-dev/" aria-label="GitHub">GitHub</a>
+        <span class="muted">·</span>
+        <a href="#" aria-label="Preprints (add link)">Preprints</a>
+      </div>
+    </div>
+
+    <section class="grid">
+      <article class="card">
+        <h2>About</h2>
+        <p class="muted">
+          YVIC Research Lab investigates how human-facing inputs constrain and organize internal representation states in large language models.
+          Through empirical studies across architectures and scales, the research examines interface-level control, representation geometry, and the stability of model behavior under deployment and efficiency constraints.
+        </p>
+
+        <h2 style="margin-top:14px;">Research interests</h2>
+        <ul>
+          <li>Representation geometry in language models</li>
+          <li>Prefix-based control and interface-level analysis</li>
+          <li>Compact and on-device LLMs (distillation, efficiency)</li>
+          <li>Robustness under competing directives / interference</li>
+        </ul>
+
+        <h2 style="margin-top:14px;">Luna (on-device system)</h2>
+        <p class="muted">
+          Luna is an offline, on-device language model system built as a research artifact.
+          It is used to study how representation structure and interface-level control behave under
+          compression, deployment constraints, and real-world human interaction.
+        </p>
+
+        <div class="pub" style="margin-top:10px;">
+          <div class="pubitem">
+            <p class="pubtitle">Offline on-device inference</p>
+            <p class="pubmeta">Quantized LLMs (GGUF) + local workflows for privacy-preserving use</p>
+          </div>
+          <div class="pubitem">
+            <p class="pubtitle">Interface evidence</p>
+            <p class="pubmeta">Real interaction traces used to motivate and validate interface-level analysis</p>
+          </div>
+        </div>
+
+        <div class="gallery" aria-label="Luna screenshots">
+          <img class="shot" src="assets/luna_init.png" alt="Luna initialization screen" />
+          <img class="shot" src="assets/luna_chat.png" alt="Luna chat interaction" />
+        </div>
+        <p class="muted" style="margin-top:10px;">
+          <span class="smallmono">Note:</span> Luna is presented here as a research artifact, not as a commercial product.
+        </p>
+
+        <h2 style="margin-top:14px;">Current projects</h2>
+        <div class="pub">
+          <div class="pubitem">
+            <p class="pubtitle">Embedding Consistency Regulation (ECR) for Compact LLMs</p>
+            <p class="pubmeta">Manuscript — under review / revision (update status as needed)</p>
+          </div>
+        </div>
+      </article>
+
+      <aside class="card">
+        <h2>At a glance</h2>
+        <div class="kvs">
+          <div class="kv">
+            <div class="k">Focus</div>
+            <div class="v">Interface-level control · Representation geometry · Compact/on-device LLMs</div>
+          </div>
+          <div class="kv">
+            <div class="k">Methods</div>
+            <div class="v">Hidden-state analysis · Geometry/centroids · Cross-model evaluation</div>
+          </div>
+          <div class="kv">
+            <div class="k">Artifacts & code</div>
+            <div class="v">Selective release with manuscripts <span class="muted">(links added when public)</span></div>
+          </div>
+          <div class="kv">
+            <div class="k">Preferred contact</div>
+            <div class="v"><a href="mailto:victor@yvic.dev">victor@yvic.dev</a></div>
+          </div>
+        </div>
+
+        <h2 style="margin-top:14px;">Notes</h2>
+        <p class="muted" style="margin:10px 0 0 0;">
+          This site is intentionally minimal and updated as manuscripts, code, and preprints become public.
+        </p>
+      </aside>
+    </section>
+
+    <footer>
+      <div>© <span class="smallmono">YVIC Research Lab</span> · <span class="smallmono">yvic.dev</span></div>
+      <div class="muted">Last updated: <span class="smallmono">2025-12-30</span></div>
+    </footer>
+  </main>
+</body>
+</html>
