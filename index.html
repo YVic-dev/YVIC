@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="YVIC Research Lab — Independent research on how control signals shape representation geometry in large language models at the human–model interface." />
+  <meta name="description" content="YVIC Research Lab — Independent research on the geometric constraints that shape control, adaptation, and compression in language models." />
   <title>YVIC Research Lab</title>
 
   <!-- Minimal, self-contained styling -->
@@ -210,23 +210,18 @@
       <article class="card">
         <h2>About</h2>
         <p class="muted">
-          YVIC Research Lab investigates how human-facing inputs constrain and organize internal representation states in large language models.
-          Through empirical studies across architectures and scales, the research examines interface-level control, representation geometry, and the stability of model behavior under deployment and efficiency constraints.
-        </p>
-
+              YVIC Research Lab examines how the geometry of pretrained representations constrains downstream control and adaptation in language models. Work focuses on three interrelated challenges: (1) preserving semantic manifolds during aggressive compression, (2) understanding the limits of prompt-based control at the representation level, and (3) identifying why certain data regions in the inherited manifold resist reliable generalization even under strong supervision. 
         <h2 style="margin-top:14px;">Research interests</h2>
         <ul>
-          <li>Representation geometry in language models</li>
-          <li>Prefix-based control and interface-level analysis</li>
-          <li>Compact and on-device LLMs (distillation, efficiency)</li>
-          <li>Robustness under competing directives / interference</li>
+          <li>Semantic manifold preservation in capacity-constrained multilingual models</li>
+          <li>Representation-level analysis of prompt and prefix control</li>
+          <li>Geometric origins of generalization failures in post-pretraining adaptation</li>
+          <li>On-device deployment under strict efficiency and privacy constraints</li>
         </ul>
 
         <h2 style="margin-top:14px;">Luna (on-device system)</h2>
         <p class="muted">
-          Luna is an offline, on-device language model system built as a research artifact.
-          It is used to study how representation structure and interface-level control behave under
-          compression, deployment constraints, and real-world human interaction.
+          Luna is a fully offline, on-device research prototype (0.6B quantized) used to validate manifold-preserving compression techniques in real deployment conditions, including local RAG and Metal-accelerated inference on consumer hardware. 
         </p>
 
         <div class="pub" style="margin-top:10px;">
@@ -262,11 +257,11 @@
         <div class="kvs">
           <div class="kv">
             <div class="k">Focus</div>
-            <div class="v">Interface-level control · Representation geometry · Compact/on-device LLMs</div>
+            <div class="v">Geometric constraints on control, compression, and post-pretraining adaptation</div>
           </div>
           <div class="kv">
             <div class="k">Methods</div>
-            <div class="v">Hidden-state analysis · Geometry/centroids · Cross-model evaluation</div>
+            <div class="v">Centroid-based geometry · Hidden-state analysis · Controlled manifold sampling</div>
           </div>
           <div class="kv">
             <div class="k">Artifacts & code</div>
